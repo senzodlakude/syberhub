@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyberHub - Your Digital Space Gateway</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #554fd8;
+            --secondary: #FF6584;
+            --accent: #36D1DC;
+            --light: #F8F9FF;
+            --dark: #2D2B55;
+            --gray: #8A8AA3;
+            --success: #4BB543;
+            --gradient: linear-gradient(135deg, var(--primary), var(--accent));
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(54, 209, 220, 0.1) 100%);
+            top: -250px;
+            right: -250px;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 101, 132, 0.1) 0%, rgba(108, 99, 255, 0.1) 100%);
+            bottom: -150px;
+            left: -150px;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .logo-display {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        
+        .logo-display h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .logo-display p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        /* Features Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features {
+            padding: 100px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-header {
+            padding: 20px;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+        
+        .service-header h3 {
+            font-size: 1.5rem;
+        }
+        
+        .service-features {
+            padding: 20px;
+        }
+        
+        .service-features ul {
+            list-style: none;
+        }
+        
+        .service-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .service-features li i {
+            margin-right: 10px;
+            color: var(--success);
+        }
+        
+        .service-button {
+            padding: 0 20px 20px;
+            text-align: center;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .about p {
+            margin-bottom: 20px;
+            color: var(--gray);
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            margin-top: 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .location i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-right: 15px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 50px 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            background: #128C7E;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            .nav-links {
+                margin: 20px 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text {
+                margin-bottom: 50px;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .logo-display h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .floating-whatsapp {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-cube"></i>
+                    SyberHub
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#gaming">Gaming</a></li>
+                    <li><a href="#internet">Internet</a></li>
+                </ul>
+                <!-- Login and Sign Up buttons removed -->
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Your Digital Space Gateway</h2>
+                    <p>SyberHub combines agency services with an internet cafe experience. From business registrations to high-speed gaming, we're your one-stop digital destination in Mzinti Nkomazi.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary"><i class="fas fa-rocket"></i> Get Started</button>
+                        <button class="btn btn-whatsapp" onclick="openWhatsApp()"><i class="fab fa-whatsapp"></i> WhatsApp Us</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="logo-display">
+                        <h1>SyberHub</h1>
+                        <p>YOUR DIGITAL SPACE GATEWAY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose SyberHub?</h2>
+                <p>We provide comprehensive digital solutions to help your business thrive in the digital space</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fast & Efficient</h3>
+                    <p>Our streamlined processes ensure quick company registrations and high-speed internet access.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Reliable</h3>
+                    <p>Your data and transactions are protected with enterprise-grade security measures.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Expert Support</h3>
+                    <p>Our team of specialists is available to guide you through every step of the process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive digital solutions for businesses and individuals</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3>Business Plans</h3>
+                    </div>
+                    <div class="service-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Professional Business Plan Creation</li>
+                            <li><i class="fas fa-check"></i> Financial Projections</li>
+                            <li><i class="fas fa-check"></i> Market Analysis</li>
+                            <li><i class="fas fa-check"></i> Investor-ready Documents</li>
+                        </ul>
+                    </div>
+                    <div class="service-button">
+                        <button class="btn btn-primary" onclick="openWhatsApp()">Get Quote</button>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3>Company Registration</h3>
+                    </div>
+                    <div class="service-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> CIPC Company Registration</li>
+                            <li><i class="fas fa-check"></i> Business Name Reservations</li>
+                            <li><i class="fas fa-check"></i> Director Updates</li>
+                            <li><i class="fas fa-check"></i> Annual Returns</li>
+                        </ul>
+                    </div>
+                    <div class="service-button">
+                        <button class="btn btn-primary" onclick="openWhatsApp()">Get Quote</button>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3>Tax Services</h3>
+                    </div>
+                    <div class="service-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> SARS Tax PIN Registration</li>
+                            <li><i class="fas fa-check"></i> Tax Clearance Certificates</li>
+                            <li><i class="fas fa-check"></i> VAT Registration</li>
+                            <li><i class="fas fa-check"></i> PAYE Submissions</li>
+                        </ul>
+                    </div>
+                    <div class="service-button">
+                        <button class="btn btn-primary" onclick="openWhatsApp()">Get Quote</button>
+                    </div>
+                </div>
+                <div class="service-card" id="gaming">
+                    <div class="service-header">
+                        <h3>Gaming Services</h3>
+                    </div>
+                    <div class="service-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> PC Gaming Stations</li>
+                            <li><i class="fas fa-check"></i> Console Gaming (PS5, Xbox)</li>
+                            <li><i class="fas fa-check"></i> Latest Game Titles</li>
+                            <li><i class="fas fa-check"></i> Gaming Tournaments</li>
+                        </ul>
+                    </div>
+                    <div class="service-button">
+                        <button class="btn btn-primary" onclick="openWhatsApp()">Book Session</button>
+                    </div>
+                </div>
+                <div class="service-card" id="internet">
+                    <div class="service-header">
+                        <h3>Internet Services</h3>
+                    </div>
+                    <div class="service-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> High-Speed Internet Access</li>
+                            <li><i class="fas fa-check"></i> Printing & Scanning</li>
+                            <li><i class="fas fa-check"></i> Computer Rental</li>
+                            <li><i class="fas fa-check"></i> Wi-Fi Hotspot</li>
+                        </ul>
+                    </div>
+                    <div class="service-button">
+                        <button class="btn btn-primary" onclick="openWhatsApp()">View Plans</button>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-header">
+                        <h3>Digital Solutions</h3>
+                    </div>
+                    <div class="service-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Website Design & Development</li>
+                            <li><i class="fas fa-check"></i> Graphic Design Services</li>
+                            <li><i class="fas fa-check"></i> SEO & Digital Marketing</li>
+                            <li><i class="fas fa-check"></i> Software Installation</li>
+                        </ul>
+                    </div>
+                    <div class="service-button">
+                        <button class="btn btn-primary" onclick="openWhatsApp()">Get Quote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About SyberHub</h2>
+                    <p>SyberHub is Mzinti Nkomazi's premier digital space gateway, combining professional agency services with a modern internet cafe experience. We are the best-located digital hub in the area, providing comprehensive solutions for both businesses and individuals.</p>
+                    <p>Our unique approach brings together business services like company registration and tax assistance with recreational offerings like high-end gaming and internet access. This makes us the go-to destination for all your digital needs.</p>
+                    <p>Whether you're starting a business, need to complete official documentation, or just want to enjoy some gaming time, SyberHub is your one-stop solution.</p>
+                    
+                    <div class="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Visit Us Today</h3>
+                            <p>We're conveniently located in Mzinti Nkomazi, ready to serve all your digital needs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <!-- Placeholder for location image -->
+                    <div style="width: 100%; height: 400px; background: var(--gradient); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">
+                        <div style="text-align: center;">
+                            <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <p>SyberHub Location<br>Mzinti Nkomazi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+        <div class="cta">
+            <h2>Ready to Experience SyberHub?</h2>
+            <p>Visit us in Mzinti Nkomazi or contact us via WhatsApp to learn more about our services.</p>
+            <button class="btn btn-whatsapp" onclick="openWhatsApp()" style="background: white; color: #25D366; font-size: 1.1rem;">
+                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SyberHub</h3>
+                    <p>Your digital space gateway for comprehensive business solutions and services in Mzinti Nkomazi.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#" onclick="openWhatsApp()"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Business Plans</a></li>
+                        <li><a href="#services">CIPC Registration</a></li>
+                        <li><a href="#services">Tax Services</a></li>
+                        <li><a href="#gaming">Gaming</a></li>
+                        <li><a href="#internet">Internet Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="openWhatsApp()">Contact Us</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#" onclick="openWhatsApp()">Help</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 SyberHub. All rights reserved. | Mzinti Nkomazi's Digital Space Gateway</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a class="floating-whatsapp" onclick="openWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // WhatsApp integration
+        function openWhatsApp() {
+            const phoneNumber = "27723491361"; // Replace with your actual WhatsApp number
+            const message = "Hello SyberHub, I'm interested in your services. Please provide more information.";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+        
+        // Simple animation for feature cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card, .service-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Button click handlers
+            document.querySelectorAll('.btn-primary').forEach(button => {
+                if (button.textContent.includes('Get Started')) {
+                    button.addEventListener('click', () => {
+                        window.location.href = '#services';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
